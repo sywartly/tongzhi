@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>江西宿舍电费通知</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* 使用渐变色 */
+            color: white; /* 为了提高可读性，将文本颜色改为白色 */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px; /* 与按钮之间的距离 */
+        }
+        button {
+            background-color: #ffffff; /* 按钮背景改为白色 */
+            color: #4CAF50; /* 按钮文字颜色为绿色 */
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* 添加阴影效果 */
+        }
+        button:hover {
+            background-color: #e8e8e8; /* 悬停时的背景色 */
+        }
+        .alert-box {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #ffd700; /* 弹窗颜色稍作调整 */
+            color: #333;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+            display: none; /* 默认不显示 */
+        }
+    </style>
+    <script>
+        function sendNotice() {
+            fetch('http://localhost:9090/notice')
+                .then(response => response.text())
+                .then(data => {
+                    showCustomAlert(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showCustomAlert('请求失败');
+                });
+        }
+
+        function showCustomAlert(message) {
+            const alertBox = document.getElementById('customAlert');
+            alertBox.textContent = message;
+            alertBox.style.display = 'block'; // 显示弹窗
+            // 5秒后自动隐藏
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</head>
+<body>
+    <div id="customAlert" class="alert-box"></div>
+    <div class="title">点击下方按钮发送电费通知</div>
+    <button onclick="sendNotice()">发送通知</button>
+</body>
+</html>
