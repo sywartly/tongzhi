@@ -52,7 +52,7 @@
     </style>
     <script>
         function sendNotice() {
-            fetch('http://localhost:9090/notice')
+            fetch('http://124.220.33.154:9090/notice')
                 .then(response => response.text())
                 .then(data => {
                     showCustomAlert(data);
