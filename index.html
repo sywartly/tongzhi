@@ -129,7 +129,7 @@
         const results = [];
         for (let i = 0; i < addresses1.length && i < addresses2.length; i++) {
             if (addresses1[i] && addresses2[i]) {
-                const response = await fetch(`http://192.168.0.100:6583/calculateDistance?address1=${encodeURIComponent(addresses1[i])}&address2=${encodeURIComponent(addresses2[i])}`);
+                const response = await fetch(`http://y.ygtape.com/calculateDistance?address1=${encodeURIComponent(addresses1[i])}&address2=${encodeURIComponent(addresses2[i])}`);
                 const data = await response.text();
                 results.push(`从 ${addresses1[i]} 到 ${addresses2[i]} 的距离: ${data}`);
 
